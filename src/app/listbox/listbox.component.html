@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let item of items, let i = index" [ngClass]="{ meineFarbe: i == updateTodoIndex }">
+    <span (click)="editItem(i)">{{ item }}</span> <button (click)="removeItem()">löschen</button>
+  </li>
+</ul>

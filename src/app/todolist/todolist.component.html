@@ -1,0 +1,11 @@
+<div *ngIf="!isEditMode">
+  <h3>Neue ToDo:</h3>
+  <input appAutoInputWidth = 400 type="text" [(ngModel)]="todoText" name="" id=""><button (click)="addTodo()">OK</button>
+</div>
+<div *ngIf="isEditMode">
+  <h3>Bearbeiten:</h3>
+  <input type="text" [(ngModel)]="todoText" name="" id=""><button (click)="updateTodo()">OK</button>
+</div>
+<app-listbox [items]="todos"
+(editItemClick)="editTodo($event)"
+(removeItemClick)="removeTodo($event)"></app-listbox>
