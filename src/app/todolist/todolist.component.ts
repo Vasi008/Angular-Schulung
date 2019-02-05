@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { ChucknorrisService } from '../chucknorris.service';
 
 @Component({
   selector: 'app-todolist',
@@ -11,6 +12,12 @@ todoText = '';
 todos = [];
 isEditMode = false;
 updateTodoIndex = -1;
+jokeText = '';
+
+
+constructor(private chucknorrisService: ChucknorrisService) {
+
+}
 
   addTodo() {
     if (this.todoText) {
@@ -20,6 +27,10 @@ updateTodoIndex = -1;
   }
   removeTodo(todoIndex: number) {
     this.todos.splice(todoIndex, 1);
+
+    this.chucknorrisService.getJoke().subscribe(joke => {
+      this.jokeText = joke.value;
+    });
   }
   editTodo(todoIndex: number) {
     this.isEditMode = true;
@@ -32,4 +43,6 @@ updateTodoIndex = -1;
     this.isEditMode = false;
     this.updateTodoIndex = -1;
   }
+
+
 }
