@@ -10,7 +10,7 @@ export class ListboxComponent {
   items = [];
 
   @Output()
-  editItemClick = new EventEmitter<number>(); 
+  editItemClick = new EventEmitter<number>();
   @Output()
   removeItemClick = new EventEmitter<number>();
 

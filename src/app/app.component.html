@@ -1,9 +1,11 @@
   <h1>
     {{ title }}!
   </h1>
-
+  
+<button (click)="loadJoke()">Load Joke</button>
 
 <a routerLink="/" routerLinkActive="currentSite" [routerLinkActiveOptions]="{ exact: true } ">Home</a> || <a routerLinkActive="currentSite" routerLink="/about" >About</a> <!---->
 
 <router-outlet></router-outlet> 
- <!-- <app-todolist></app-todolist> -->  
+<app-load-joke></app-load-joke>
+ <!-- <app-todolist></app-todolist> -->

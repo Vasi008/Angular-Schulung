@@ -1,23 +1,34 @@
-import { Component} from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { ChucknorrisService } from '../chucknorris.service';
 import { Router } from '@angular/router';
+import { TodolistService } from '../todolist.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todolist',
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.scss']
 })
-export class TodolistComponent {
+export class TodolistComponent implements OnDestroy {
 
 todoText = '';
 todos = [];
 isEditMode = false;
 updateTodoIndex = -1;
 jokeText = '';
+jokeService$;
+active = true;
 
 
-constructor(private chucknorrisService: ChucknorrisService, private router: Router) {
+constructor(private chucknorrisService: ChucknorrisService, private router: Router, todolistService: TodolistService) {
+this.jokeService$ = this.chucknorrisService.getJoke();
+todolistService.loadJoke.pipe(
+  takeWhile(() => this.active)
+).subscribe(() => this.loadJoke());
+}
 
+ngOnDestroy() {
+  this.active = false;
 }
 
   addTodo() {
@@ -25,6 +36,11 @@ constructor(private chucknorrisService: ChucknorrisService, private router: Rout
       this.todos.push(this.todoText);
       this.todoText = '';
     }
+  }
+  loadJoke() {
+    this.chucknorrisService.getJoke().subscribe(joke => {
+      this.jokeText = joke.value;
+    });
   }
   removeTodo(todoIndex: number) {
     this.todos.splice(todoIndex, 1);

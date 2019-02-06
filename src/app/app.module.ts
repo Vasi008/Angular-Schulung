@@ -12,6 +12,8 @@ import { ListboxComponent } from './listbox/listbox.component';
 import { MyuppercasePipe } from './myuppercase.pipe';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoadJokeComponent } from './load-joke/load-joke.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ListboxComponent,
     MyuppercasePipe,
     AboutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoadJokeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: TodolistComponent},
-      { path: 'about', component: AboutComponent},
+      { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
       { path: '**', component: NotFoundComponent},  // die Reihenfolge beim Routing ist sehr wichtig.
     ])
   ],
