@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { ChucknorrisService } from '../chucknorris.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todolist',
@@ -15,7 +16,7 @@ updateTodoIndex = -1;
 jokeText = '';
 
 
-constructor(private chucknorrisService: ChucknorrisService) {
+constructor(private chucknorrisService: ChucknorrisService, private router: Router) {
 
 }
 
@@ -30,6 +31,7 @@ constructor(private chucknorrisService: ChucknorrisService) {
 
     this.chucknorrisService.getJoke().subscribe(joke => {
       this.jokeText = joke.value;
+      this.chucknorrisService.lastJokeText = joke.value;
     });
   }
   editTodo(todoIndex: number) {
@@ -42,6 +44,10 @@ constructor(private chucknorrisService: ChucknorrisService) {
     this.todoText = '';
     this.isEditMode = false;
     this.updateTodoIndex = -1;
+  }
+
+  goToAbout() {
+    this.router.navigate(['/about']);
   }
 
 
