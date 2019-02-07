@@ -12,7 +12,6 @@ import { ListboxComponent } from './listbox/listbox.component';
 import { MyuppercasePipe } from './myuppercase.pipe';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LoadJokeComponent } from './load-joke/load-joke.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -26,7 +25,6 @@ import { AuthGuard } from './auth.guard';
     MyuppercasePipe,
     AboutComponent,
     NotFoundComponent,
-    LoadJokeComponent
   ],
   imports: [
     BrowserModule,
